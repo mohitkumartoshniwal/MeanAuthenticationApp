@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+  <div class="navbar-header">
+  </div>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/']">Home</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/userlogin']">User Login</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/vendorlogin']">Vendor Login</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/userregister']">User Register</a>
+      </li>
+
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/vendorregister']">Vendor Register</a>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>

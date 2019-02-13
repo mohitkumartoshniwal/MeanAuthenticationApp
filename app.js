@@ -42,9 +42,8 @@ mongoose.connection.on('error', (err) => {
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -65,7 +64,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 
 app.use('/users', users);
@@ -131,3 +130,12 @@ app.get('/',function (req,res) {
 app.listen(3000,function () {
     console.log("Listening on port 3000");
 });
+
+
+
+//It's probably a CORS issue.
+// Your Angular2 APP is hosted on another server than the API you're calling.
+//
+// If you want to bypass this (only for test purposes), install this Chrome extension and add
+//
+// Access-Control-Allow-Origin:
