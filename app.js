@@ -12,10 +12,33 @@ var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
-var db = mongoose.connection;
+
+
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const config = require('./config/database');
+const users = require('./routes/users');
+
+//var db = mongoose.connection;
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+// Connect To Database
+mongoose.connect(config.database);
+
+// On Connection
+mongoose.connection.on('connected', () => {
+    console.log('Connected to database '+config.database);
+});
+
+// On Error
+mongoose.connection.on('error', (err) => {
+    console.log('Database error: '+err);
+});
+
 
 var app = express();
 
@@ -27,6 +50,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //handle session
@@ -39,6 +64,17 @@ app.use(session({
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+//require('./config/passport')(passport);
+
+
+app.use('/users', users);
+
+// Body Parser Middleware
+app.use(bodyParser.json());
+
+// CORS Middleware
+app.use(cors());
 
 //validator
 app.use(expressValidator({
@@ -83,4 +119,15 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+
+
+require('./config/passport')(passport);
+
+
+app.get('/',function (req,res) {
+    res.send("Hello world");
+});
+
+app.listen(3000,function () {
+    console.log("Listening on port 3000");
+});
