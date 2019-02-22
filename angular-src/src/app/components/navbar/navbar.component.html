@@ -6,19 +6,29 @@
       <li class="nav-item active" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
         <a class="nav-link" [routerLink]="['/']">Home</a>
       </li>
-      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!authService.UserloggedIn()" [routerLinkActiveOptions] = "{exact:true}">
         <a class="nav-link" [routerLink]="['/userlogin']">User Login</a>
       </li>
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
         <a class="nav-link" [routerLink]="['/vendorlogin']">Vendor Login</a>
       </li>
-      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="!authService.UserloggedIn()"[routerLinkActiveOptions] = "{exact:true}">
         <a class="nav-link" [routerLink]="['/userregister']">User Register</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
         <a class="nav-link" [routerLink]="['/vendorregister']">Vendor Register</a>
       </li>
+      <li class="nav-item" [routerLinkActive]="['active']" *ngIf="authService.UserloggedIn()"[routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/userprofile']">User Profile</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" [routerLink]="['/vendorprofile']">Vendor Profile</a>
+      </li>
+      <li>
+      <li class="nav-item" *ngIf="authService.UserloggedIn()"><a class="nav-link"(click)="onUserLogoutClick()" href="#">UserLogout</a></li>
+
+
 
     </ul>
 

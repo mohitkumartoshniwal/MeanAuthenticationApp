@@ -16,12 +16,13 @@ import { VendorloginComponent } from './components/vendorlogin/vendorlogin.compo
 
 import {ValidateService} from "./services/validate.service";
 import {AuthService} from "./services/auth.service";
+import {AuthGuard} from "./guards/auth.guard";
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
   {path:'userregister', component: UserregisterComponent},
   {path:'vendorregister', component: VendorregisterComponent},
-  {path:'userprofile', component: UserprofileComponent},
+  {path:'userprofile', component: UserprofileComponent, canActivate:[AuthGuard]},
   {path:'vendorprofile', component: UserprofileComponent},
   {path:'userlogin', component: UserloginComponent},
   {path:'vendorlogin', component: UserloginComponent}
@@ -46,7 +47,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
 
   ],
-  providers: [ValidateService,AuthService],
+  providers: [ValidateService,AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
